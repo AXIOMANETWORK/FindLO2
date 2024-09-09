@@ -1,0 +1,241 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'login_controller.dart';
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    final verticalMargin = MediaQuery.of(context).size.height * 0.06;
+    return Scaffold(
+      body: Container(
+        margin: EdgeInsets.symmetric(vertical: verticalMargin),
+        width: double.infinity,
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                _textLogin(),
+                SizedBox(height: 10),
+                _textLoginDesc(),
+                SizedBox(height: 30),
+                _textFieldEmail(),
+                SizedBox(height: 15),
+                _textFieldPassword(),
+                _buttonLogin(),
+                _textForgotPassword(),
+                SizedBox(height: 60),
+                _textLoginAlternatives(),
+                SizedBox(height: 20),
+                _buttonGoogleLogin(),
+                _textDontHaveAccount()
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _textLogin(){
+    return Text(
+      "Login",
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 40,
+      ),
+    );
+  }
+  Widget _textLoginAlternatives(){
+    return Text(
+      "or Login With",
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 17,
+      ),
+    );
+  }
+  Widget _textLoginDesc(){
+    return Text(
+      "Add your details to login",
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 18,
+      ),
+    );
+  }
+  Widget _textFieldEmail() {
+    return Container(
+      padding: EdgeInsets.all(6),
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+          hintText: "Your email",
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(15),
+          hintStyle: TextStyle(
+            color: Colors.grey[400],
+          ),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your email';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+  Widget _textFieldPassword() {
+    return Container(
+      padding: EdgeInsets.all(6),
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: TextFormField(
+        obscureText: true,
+        decoration: InputDecoration(
+          hintText: "Password",
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(15),
+          hintStyle: TextStyle(
+            color: Colors.grey[400],
+          ),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your password';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+  Widget _buttonLogin() {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+      child: ElevatedButton(
+        onPressed: () {
+          if (_formKey.currentState?.validate() ?? false) {
+            Navigator.pushReplacementNamed(context, "principal");
+          }
+        },
+        child: Text("Login", style: TextStyle(fontSize: 20)),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color.fromARGB(255,79, 129, 189),
+          foregroundColor: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 15),
+        ),
+      ),
+    );
+  }
+  Widget _textDontHaveAccount(){
+    return
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Don't have an account?",
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 17
+            ),
+          ),
+          SizedBox(width: 7),
+          GestureDetector(
+            onTap: (){},
+            child: Text(
+              "Sign up",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                  fontSize: 17
+              ),
+            ),
+          ),
+
+        ],
+      );
+  }
+  Widget _textForgotPassword(){
+    return
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: (){},
+            child: Text(
+              "Forgot your password? ",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 17
+              ),
+            ),
+          ),
+
+        ],
+      );
+  }
+  Widget _buttonGoogleLogin() {
+    return Consumer<LoginController>(
+      builder: (context, controller, child) {
+        return Container(
+          width: double.infinity,
+          margin: EdgeInsets.symmetric(horizontal: 50),
+          child: ElevatedButton.icon(
+            onPressed: controller.isLoading
+                ? null // Desactiva el botón si está cargando
+                : () async {
+              try {
+                await controller.signInWithGoogle();
+                // Redirige al usuario si la autenticación es exitosa
+                if (controller.user != null) {
+                  Navigator.pushReplacementNamed(context, 'principal');
+                } else if (controller.errorMessage != null) {
+                  // Muestra un mensaje de error si ocurre algún problema
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(controller.errorMessage!)),
+                  );
+                }
+              } catch (e) {
+                print('Error during Google sign-in: $e');
+              }
+            },
+            icon: controller.isLoading
+                ? CircularProgressIndicator() // Muestra el indicador de carga
+                : Image.asset(
+              'assets/img/google_logo.png',
+              width: 24,
+              height: 24,
+            ),
+            label: Text("Login with Google", style: TextStyle(fontSize: 20)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red[400],
+              foregroundColor: Colors.white,
+              padding: EdgeInsets.symmetric(vertical: 15),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+
+
+}

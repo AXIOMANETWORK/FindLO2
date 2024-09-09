@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "862054338294",
+    "project_id": "findlo-effce",
+    "storage_bucket": "findlo-effce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862054338294:android:2e66d16aa17206d88126d7",
+        "android_client_info": {
+          "package_name": "com.axiomanetwork.flutter_trabajo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862054338294-g7j3nfqoj87vqb9bnhn3j952pojiih1g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.axiomanetwork.flutter_trabajo",
+            "certificate_hash": "af0fbb5d03726ae359874f279e0ef3b617c98cd7"
+          }
+        },
+        {
+          "client_id": "862054338294-tbvfn56veqbnppa71ha6algdj39405uq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUkIu2li8dJyUPyy2iIHyYOQQt3PUz1oI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862054338294-q1b4uho22jo8ajfk9k8udoulqu4t3erv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
