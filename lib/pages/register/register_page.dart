@@ -51,7 +51,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final verticalMargin = MediaQuery.of(context).size.height * 0.06;
+    final verticalMargin = MediaQuery.of(context).size.height * 0.05;
+    final textFieldsMargin = MediaQuery.of(context).size.height * 0.01;
     return Scaffold(
       body: Container(
         margin: EdgeInsets.symmetric(vertical: verticalMargin),
@@ -67,19 +68,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 _textRegisterDesc(),
                 SizedBox(height: 30),
                 _textFieldName(),
-                SizedBox(height: 15),
+                SizedBox(height: textFieldsMargin),
                 _textFieldEmail(),
-                SizedBox(height: 15),
+                SizedBox(height: textFieldsMargin),
                 _textFieldPhone(),
-                SizedBox(height: 15),
+                SizedBox(height: textFieldsMargin),
                 _textFieldAddress(),
-                SizedBox(height: 15),
+                SizedBox(height: textFieldsMargin),
                 _textFieldPassword(),
-                SizedBox(height: 15),
+                SizedBox(height: textFieldsMargin),
                 _textFieldConfirmPassword(),
-                SizedBox(height: 15),
+                SizedBox(height: textFieldsMargin),
                 _buttonRegister(),
-                SizedBox(height: 20),
                 _textHaveAccount()
               ],
             ),

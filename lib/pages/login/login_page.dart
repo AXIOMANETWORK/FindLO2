@@ -13,7 +13,8 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final verticalMargin = MediaQuery.of(context).size.height * 0.06;
+    final verticalMargin = MediaQuery.of(context).size.height * 0.05;
+    final textFieldsMargin = MediaQuery.of(context).size.height * 0.01;
     return Scaffold(
       body: Container(
         margin: EdgeInsets.symmetric(vertical: verticalMargin),
@@ -28,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
                 _textLoginDesc(),
                 SizedBox(height: 30),
                 _textFieldEmail(),
-                SizedBox(height: 15),
+                SizedBox(height: textFieldsMargin),
                 _textFieldPassword(),
                 _buttonLogin(),
                 _textForgotPassword(),
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                 _textLoginAlternatives(),
                 SizedBox(height: 20),
                 _buttonGoogleLogin(),
-                SizedBox(height: 15),
+                SizedBox(height: textFieldsMargin),
                 _textDontHaveAccount()
               ],
             ),
