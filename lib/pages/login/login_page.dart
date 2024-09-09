@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
                 _textLoginAlternatives(),
                 SizedBox(height: 20),
                 _buttonGoogleLogin(),
+                SizedBox(height: 15),
                 _textDontHaveAccount()
               ],
             ),
@@ -159,7 +160,9 @@ class _LoginPageState extends State<LoginPage> {
           ),
           SizedBox(width: 7),
           GestureDetector(
-            onTap: (){},
+            onTap: (){
+              Navigator.pushReplacementNamed(context,"register");
+            },
             child: Text(
               "Sign up",
               style: TextStyle(
@@ -169,7 +172,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-
         ],
       );
   }

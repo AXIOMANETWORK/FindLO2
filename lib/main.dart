@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_trabajo/pages/login/login_controller.dart';
 import 'package:flutter_trabajo/pages/login/login_page.dart';
 import 'package:flutter_trabajo/pages/mainPage/main_page.dart';
+import 'package:flutter_trabajo/pages/register/register_page.dart';
 import 'package:flutter_trabajo/widgets/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatefulWidget {
       routes: {
         "splash":(BuildContext context)=>Splash(),
         "login":(BuildContext context)=>LoginPage(),
+        "register":(BuildContext context)=>RegistrationPage(),
         "principal":(BuildContext context)=>MainPage(),
       },
     );

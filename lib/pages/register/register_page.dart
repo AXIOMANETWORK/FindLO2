@@ -9,38 +9,41 @@ class RegistrationPage extends StatefulWidget {
 
 class _RegistrationPageState extends State<RegistrationPage> {
   final _emailController = TextEditingController();
+  final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   final _phoneController = TextEditingController();
   final _addressController = TextEditingController();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final _formKey = GlobalKey<FormState>();
 
   Future<void> _register() async {
     final email = _emailController.text;
     final password = _passwordController.text;
     final phone = _phoneController.text;
     final address = _addressController.text;
+    final name = _nameController.text;
 
     try {
-      // Create user with email and password
+      // Creacion del usuario
       UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      // Get the user ID
+      // User id
       String uid = userCredential.user!.uid;
 
-      // Save additional user data to Firestore
+      //Guardar el resto de datos en firebase
       await _firestore.collection('users').doc(uid).set({
         'email': email,
         'phone': phone,
         'address': address,
+        'name' : name
       });
 
-      // Optionally navigate to another screen
-      Navigator.pushReplacementNamed(context, 'home');
     } catch (e) {
       print('Registration error: $e');
     }
@@ -48,35 +51,278 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final verticalMargin = MediaQuery.of(context).size.height * 0.06;
     return Scaffold(
-      appBar: AppBar(title: Text('Register')),
-      body: Padding(
+      body: Container(
+        margin: EdgeInsets.symmetric(vertical: verticalMargin),
+        width: double.infinity,
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                _textRegister(),
+                SizedBox(height: 10),
+                _textRegisterDesc(),
+                SizedBox(height: 30),
+                _textFieldName(),
+                SizedBox(height: 15),
+                _textFieldEmail(),
+                SizedBox(height: 15),
+                _textFieldPhone(),
+                SizedBox(height: 15),
+                _textFieldAddress(),
+                SizedBox(height: 15),
+                _textFieldPassword(),
+                SizedBox(height: 15),
+                _textFieldConfirmPassword(),
+                SizedBox(height: 15),
+                _buttonRegister(),
+                SizedBox(height: 20),
+                _textHaveAccount()
+              ],
             ),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
+          ),
+
+        ),
+      ),
+    );
+  }
+
+  Widget _textFieldEmail() {
+    return Container(
+      padding: EdgeInsets.all(6),
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: TextFormField(
+        controller:_emailController ,
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+          hintText: "Your email",
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(15),
+          hintStyle: TextStyle(
+            color: Colors.grey[400],
+          ),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your email';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+  Widget _textFieldPhone() {
+    return Container(
+      padding: EdgeInsets.all(6),
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: TextFormField(
+        controller:_phoneController ,
+        keyboardType: TextInputType.phone,
+        decoration: InputDecoration(
+          hintText: "Mobile No",
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(15),
+          hintStyle: TextStyle(
+            color: Colors.grey[400],
+          ),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your phone';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+  Widget _textFieldName() {
+    return Container(
+      padding: EdgeInsets.all(6),
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: TextFormField(
+        controller:_nameController ,
+        keyboardType: TextInputType.phone,
+        decoration: InputDecoration(
+          hintText: "Name",
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(15),
+          hintStyle: TextStyle(
+            color: Colors.grey[400],
+          ),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your name';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+  Widget _textFieldAddress() {
+    return Container(
+      padding: EdgeInsets.all(6),
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: TextFormField(
+        controller:_addressController ,
+        keyboardType: TextInputType.phone,
+        decoration: InputDecoration(
+          hintText: "Address",
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(15),
+          hintStyle: TextStyle(
+            color: Colors.grey[400],
+          ),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your address';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+  Widget _textFieldPassword() {
+    return Container(
+      padding: EdgeInsets.all(6),
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: TextFormField(
+        controller: _passwordController,
+        obscureText: true,
+        decoration: InputDecoration(
+          hintText: "Password",
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(15),
+          hintStyle: TextStyle(
+            color: Colors.grey[400],
+          ),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your password';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+  Widget _textFieldConfirmPassword() {
+    return Container(
+      padding: EdgeInsets.all(6),
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: TextFormField(
+        controller: _confirmPasswordController,
+        obscureText: true,
+        decoration: InputDecoration(
+          hintText: "Confirm Password",
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(15),
+          hintStyle: TextStyle(
+            color: Colors.grey[400],
+          ),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please confirm your password';
+          } else if (value != _passwordController.text) {
+            return 'Passwords do not match';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+  Widget _textRegister(){
+    return Text(
+      "Sign Up",
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 40,
+      ),
+    );
+  }
+  Widget _textRegisterDesc(){
+    return Text(
+      "Add your details to sign up",
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 18,
+      ),
+    );
+  }
+  Widget _textHaveAccount(){
+    return
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Already have an account?",
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 17
             ),
-            TextField(
-              controller: _phoneController,
-              decoration: InputDecoration(labelText: 'Phone Number'),
+          ),
+          SizedBox(width: 7),
+          GestureDetector(
+            onTap: (){
+              Navigator.pushReplacementNamed(context,"login");
+            },
+            child: Text(
+              "Login",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                  fontSize: 17
+              ),
             ),
-            TextField(
-              controller: _addressController,
-              decoration: InputDecoration(labelText: 'Address'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _register,
-              child: Text('Register'),
-            ),
-          ],
+          ),
+        ],
+      );
+  }
+  Widget _buttonRegister() {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+      child: ElevatedButton(
+        onPressed: () {
+          if (_formKey.currentState?.validate() ?? false) {
+            _register();
+            Navigator.pushReplacementNamed(context, "login");
+          }
+        },
+        child: Text("Sign up", style: TextStyle(fontSize: 20)),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color.fromARGB(255,79, 129, 189),
+          foregroundColor: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 15),
         ),
       ),
     );

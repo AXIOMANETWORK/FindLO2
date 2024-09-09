@@ -54,21 +54,6 @@ class VideoState extends State<Splash> with SingleTickerProviderStateMixin {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 25),
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  'FindLO',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 45,
-                      color: Colors.white),
-                )
-              ],
-            ),
-          ),
         ],
       ),
     );
