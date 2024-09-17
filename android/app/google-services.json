@@ -1,42 +1,78 @@
 {
   "project_info": {
-    "project_number": "862054338294",
-    "project_id": "findlo-effce",
-    "storage_bucket": "findlo-effce.appspot.com"
+    "project_number": "1040516199155",
+    "firebase_url": "https://findlo-2736e-default-rtdb.firebaseio.com",
+    "project_id": "findlo-2736e",
+    "storage_bucket": "findlo-2736e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:862054338294:android:2e66d16aa17206d88126d7",
+        "mobilesdk_app_id": "1:1040516199155:android:382b5d8249cbef3adc3d86",
         "android_client_info": {
-          "package_name": "com.axiomanetwork.flutter_trabajo"
+          "package_name": "com.appfindlo.axiomanetwork"
         }
       },
       "oauth_client": [
         {
-          "client_id": "862054338294-g7j3nfqoj87vqb9bnhn3j952pojiih1g.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.axiomanetwork.flutter_trabajo",
-            "certificate_hash": "af0fbb5d03726ae359874f279e0ef3b617c98cd7"
-          }
-        },
-        {
-          "client_id": "862054338294-tbvfn56veqbnppa71ha6algdj39405uq.apps.googleusercontent.com",
+          "client_id": "1040516199155-sv389k6o73qjpk914a1skk0n594mjd4l.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAUkIu2li8dJyUPyy2iIHyYOQQt3PUz1oI"
+          "current_key": "AIzaSyBdKSsw2ms-QsbR29SdTGjGGgwmY0bo5dI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "862054338294-q1b4uho22jo8ajfk9k8udoulqu4t3erv.apps.googleusercontent.com",
+              "client_id": "1040516199155-ianhj8tqac7msfc6iuoh0nmnnbeuhjls.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1040516199155-5stfbb5bdjmok9ph0hkkjvsam15eqp8k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.axioma.findlo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040516199155:android:daf8fb47bb21657bdc3d86",
+        "android_client_info": {
+          "package_name": "com.axiomanetwork.flutter_trabajo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040516199155-sv389k6o73qjpk914a1skk0n594mjd4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdKSsw2ms-QsbR29SdTGjGGgwmY0bo5dI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040516199155-ianhj8tqac7msfc6iuoh0nmnnbeuhjls.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1040516199155-5stfbb5bdjmok9ph0hkkjvsam15eqp8k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.axioma.findlo"
+              }
             }
           ]
         }
