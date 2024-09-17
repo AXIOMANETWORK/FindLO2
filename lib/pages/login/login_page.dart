@@ -162,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(width: 7),
           GestureDetector(
             onTap: (){
-              Navigator.pushReplacementNamed(context,"register");
+              Navigator.pushNamed(context,"register");
             },
             child: Text(
               "Sign up",
