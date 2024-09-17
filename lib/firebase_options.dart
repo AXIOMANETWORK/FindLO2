@@ -50,21 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAUkIu2li8dJyUPyy2iIHyYOQQt3PUz1oI',
-    appId: '1:862054338294:android:2e66d16aa17206d88126d7',
-    messagingSenderId: '862054338294',
-    projectId: 'findlo-effce',
-    storageBucket: 'findlo-effce.appspot.com',
+    apiKey: 'AIzaSyDVPs1PowjSnofKdy_cImD0zv33tdM2IVY',
+    appId: '1:1040516199155:android:daf8fb47bb21657bdc3d86',
+    messagingSenderId: '1040516199155',
+    projectId: 'findlo-2736e',
+    storageBucket: 'findlo-2736e.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCExvIXqEziPeXbd6fTB1iboiOqJGY_Cow',
-    appId: '1:862054338294:ios:f9eb214a0f264cdf8126d7',
-    messagingSenderId: '862054338294',
-    projectId: 'findlo-effce',
-    storageBucket: 'findlo-effce.appspot.com',
-    androidClientId: '862054338294-g7j3nfqoj87vqb9bnhn3j952pojiih1g.apps.googleusercontent.com',
-    iosClientId: '862054338294-1ilppnujchf9h29808ih56ippq2aei4o.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDVPs1PowjSnofKdy_cImD0zv33tdM2IVY',
+    appId: '1:1040516199155:ios:81ce9be91c6d330adc3d86',
+    messagingSenderId: '1040516199155',
+    projectId: 'findlo-2736e',
+    storageBucket: 'findlo-2736e.appspot.com',
+    androidClientId: '1040516199155-sv389k6o73qjpk914a1skk0n594mjd4l.apps.googleusercontent.com',
+    iosClientId: '1040516199155-eodcuhleku10dk9lnq28b7kotlm39p6j.apps.googleusercontent.com',
     iosBundleId: 'com.axiomanetwork.flutterTrabajo',
   );
 }

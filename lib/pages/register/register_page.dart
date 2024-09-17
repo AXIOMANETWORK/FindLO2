@@ -156,7 +156,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       ),
       child: TextFormField(
         controller:_nameController ,
-        keyboardType: TextInputType.phone,
+        keyboardType: TextInputType.name,
         decoration: InputDecoration(
           hintText: "Name",
           border: InputBorder.none,
@@ -184,7 +184,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       ),
       child: TextFormField(
         controller:_addressController ,
-        keyboardType: TextInputType.phone,
+        keyboardType: TextInputType.name,
         decoration: InputDecoration(
           hintText: "Address",
           border: InputBorder.none,

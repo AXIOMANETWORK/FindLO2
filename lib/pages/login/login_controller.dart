@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginController extends ChangeNotifier {
@@ -46,4 +47,41 @@ class LoginController extends ChangeNotifier {
       notifyListeners();
     }
   }
+  // Facebook Sign-In
+  Future<UserCredential?> signInWithFacebook() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final LoginResult result = await FacebookAuth.instance.login();
+
+      if (result.status == LoginStatus.success) {
+        final AccessToken? accessToken = result.accessToken;
+
+        if (accessToken != null) {
+          // Usa accessToken.token para obtener el token como string
+          final OAuthCredential credential = FacebookAuthProvider.credential(accessToken.tokenString);
+
+          final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+          _user = userCredential.user;
+
+          return userCredential;
+        } else {
+          _errorMessage = 'Failed to get access token';
+          return null;
+        }
+      } else {
+        _errorMessage = 'Facebook sign-in failed: ${result.message}';
+        return null;
+      }
+    } catch (e) {
+      _errorMessage = 'Error during Facebook sign-in: $e';
+      return null;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+
 }

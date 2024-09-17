@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final verticalMargin = MediaQuery.of(context).size.height * 0.05;
@@ -37,6 +41,8 @@ class _LoginPageState extends State<LoginPage> {
                 _textLoginAlternatives(),
                 SizedBox(height: 20),
                 _buttonGoogleLogin(),
+                SizedBox(height: textFieldsMargin),
+                _buttonFacebookLogin(),
                 SizedBox(height: textFieldsMargin),
                 _textDontHaveAccount()
               ],
@@ -83,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
         borderRadius: BorderRadius.circular(30),
       ),
       child: TextFormField(
+        controller: _emailController,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           hintText: "Your email",
@@ -110,6 +117,7 @@ class _LoginPageState extends State<LoginPage> {
         borderRadius: BorderRadius.circular(30),
       ),
       child: TextFormField(
+        controller: _passwordController,
         obscureText: true,
         decoration: InputDecoration(
           hintText: "Password",
@@ -133,14 +141,32 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
           if (_formKey.currentState?.validate() ?? false) {
-            Navigator.pushReplacementNamed(context, "principal");
+            // Obtener los valores de los campos de email y contraseña
+            String email = _emailController.text.trim();
+            String password = _passwordController.text.trim();
+
+            try {
+              // Intentar iniciar sesión con Firebase Authentication
+              UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                email: email,
+                password: password,
+              );
+
+              // Si la autenticación es exitosa, redirigir a la página principal
+              Navigator.pushReplacementNamed(context, "principal");
+            } catch (e) {
+              // Si ocurre un error (usuario no encontrado, contraseña incorrecta, etc.), mostrar un mensaje
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Login failed: ${e.toString()}")),
+              );
+            }
           }
         },
         child: Text("Login", style: TextStyle(fontSize: 20)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255,79, 129, 189),
+          backgroundColor: Color.fromARGB(255, 79, 129, 189),
           foregroundColor: Colors.white,
           padding: EdgeInsets.symmetric(vertical: 15),
         ),
@@ -230,6 +256,49 @@ class _LoginPageState extends State<LoginPage> {
             label: Text("Login with Google", style: TextStyle(fontSize: 20)),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red[400],
+              foregroundColor: Colors.white,
+              padding: EdgeInsets.symmetric(vertical: 15),
+            ),
+          ),
+        );
+      },
+    );
+  }
+  Widget _buttonFacebookLogin() {
+    return Consumer<LoginController>(
+      builder: (context, controller, child) {
+        return Container(
+          width: double.infinity,
+          margin: EdgeInsets.symmetric(horizontal: 50),
+          child: ElevatedButton.icon(
+            onPressed: controller.isLoading
+                ? null // Desactiva el botón si está cargando
+                : () async {
+              try {
+                await controller.signInWithFacebook();
+                // Redirige al usuario si la autenticación es exitosa
+                if (controller.user != null) {
+                  Navigator.pushReplacementNamed(context, 'principal');
+                } else if (controller.errorMessage != null) {
+                  // Muestra un mensaje de error si ocurre algún problema
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(controller.errorMessage!)),
+                  );
+                }
+              } catch (e) {
+                print('Error during Facebook sign-in: $e');
+              }
+            },
+            icon: controller.isLoading
+                ? CircularProgressIndicator() // Muestra el indicador de carga
+                : Image.asset(
+              'assets/img/facebook_logo.png',
+              width: 24,
+              height: 24,
+            ),
+            label: Text("Login with Facebook", style: TextStyle(fontSize: 20)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue[400],
               foregroundColor: Colors.white,
               padding: EdgeInsets.symmetric(vertical: 15),
             ),
