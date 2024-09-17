@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <string name="app_name">FindLO</string>
+   <string name="facebook_app_id">1232369541425241</string>
+   <string name="fb_login_protocol_scheme">fb1232369541425241</string>
+   <string name="facebook_client_token">8d71fa3e0be5a272be11396a660c9af5</string>
+</resources>

@@ -1,4 +1,4 @@
-package com.axiomanetwork.flutter_trabajo
+package com.axiomanetwork.findlo
 
 import io.flutter.embedding.android.FlutterActivity
 

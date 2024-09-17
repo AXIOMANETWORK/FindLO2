@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDVPs1PowjSnofKdy_cImD0zv33tdM2IVY',
-    appId: '1:1040516199155:android:daf8fb47bb21657bdc3d86',
+    appId: '1:1040516199155:android:7840a39c80a182afdc3d86',
     messagingSenderId: '1040516199155',
     projectId: 'findlo-2736e',
     storageBucket: 'findlo-2736e.appspot.com',
