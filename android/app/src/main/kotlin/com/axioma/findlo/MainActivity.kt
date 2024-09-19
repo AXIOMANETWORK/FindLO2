@@ -1,4 +1,4 @@
-package com.axiomanetwork.findlo
+package com.axioma.findlo
 
 import io.flutter.embedding.android.FlutterActivity
 

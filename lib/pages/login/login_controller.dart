@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -14,6 +15,7 @@ class LoginController extends ChangeNotifier {
   User? get user => _user;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<UserCredential?> signInWithGoogle() async {
     _isLoading = true;
@@ -37,6 +39,14 @@ class LoginController extends ChangeNotifier {
 
       final userCredential = await _firebaseAuth.signInWithCredential(credential);
       _user = userCredential.user;
+
+      // Guardar datos adicionales en Firestore
+      await _firestore.collection('users').doc(_user!.uid).set({
+        'email': _user!.email,
+        'displayName': _user!.displayName,
+        'photoURL': _user!.photoURL,
+        // Aquí puedes añadir más campos si lo necesitas
+      }, SetOptions(merge: true)); // Usa merge: true para no sobrescribir datos existentes
 
       return userCredential;
     } catch (e) {
@@ -64,6 +74,15 @@ class LoginController extends ChangeNotifier {
 
           final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
           _user = userCredential.user;
+
+          // Guardar datos adicionales en Firestore
+          await _firestore.collection('users').doc(_user!.uid).set({
+            'email': _user!.email,
+            'displayName': _user!.displayName,
+            'photoURL': _user!.photoURL,
+            // Aquí puedes añadir más campos si lo necesitas
+          }, SetOptions(merge: true)); // Usa merge: true para no sobrescribir datos existentes
+
 
           return userCredential;
         } else {
