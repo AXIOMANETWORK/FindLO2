@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1040516199155:android:382b5d8249cbef3adc3d86",
         "android_client_info": {
-          "package_name": "com.axioma.findlo"
+          "package_name": "com.appfindlo.axiomanetwork"
         }
       },
       "oauth_client": [
@@ -44,12 +44,20 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1040516199155:android:daf8fb47bb21657bdc3d86",
+        "mobilesdk_app_id": "1:1040516199155:android:7840a39c80a182afdc3d86",
         "android_client_info": {
           "package_name": "com.axioma.findlo"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1040516199155-o5g2h0cv2e5n9g3070nled0pf7llkj2j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.axioma.findlo",
+            "certificate_hash": "af0fbb5d03726ae359874f279e0ef3b617c98cd7"
+          }
+        },
         {
           "client_id": "1040516199155-sv389k6o73qjpk914a1skk0n594mjd4l.apps.googleusercontent.com",
           "client_type": 3

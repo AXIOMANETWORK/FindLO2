@@ -43,7 +43,7 @@ class LoginController extends ChangeNotifier {
       // Guardar datos adicionales en Firestore
       await _firestore.collection('users').doc(_user!.uid).set({
         'email': _user!.email,
-        'displayName': _user!.displayName,
+        'name': _user!.displayName,
         'photoURL': _user!.photoURL,
         // Aquí puedes añadir más campos si lo necesitas
       }, SetOptions(merge: true)); // Usa merge: true para no sobrescribir datos existentes
@@ -78,7 +78,7 @@ class LoginController extends ChangeNotifier {
           // Guardar datos adicionales en Firestore
           await _firestore.collection('users').doc(_user!.uid).set({
             'email': _user!.email,
-            'displayName': _user!.displayName,
+            'name': _user!.displayName,
             'photoURL': _user!.photoURL,
             // Aquí puedes añadir más campos si lo necesitas
           }, SetOptions(merge: true)); // Usa merge: true para no sobrescribir datos existentes
