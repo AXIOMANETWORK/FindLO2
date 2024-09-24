@@ -50,7 +50,7 @@ class LoginController extends ChangeNotifier {
 
       return userCredential;
     } catch (e) {
-      _errorMessage = 'Error during sign-in: $e';
+      _errorMessage = 'Error during sign-in: ${e.toString()}';
       return null;
     } finally {
       _isLoading = false;
