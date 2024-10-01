@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_trabajo/pages/login/confirm_password.dart';
 import 'package:flutter_trabajo/pages/login/login_controller.dart';
 import 'package:flutter_trabajo/pages/login/login_page.dart';
+import 'package:flutter_trabajo/pages/login/reset_password.dart';
 import 'package:flutter_trabajo/pages/mainPage/main_page.dart';
 import 'package:flutter_trabajo/pages/register/register_page.dart';
 import 'package:flutter_trabajo/widgets/splash_screen.dart';
@@ -45,11 +47,13 @@ class MyApp extends StatefulWidget {
       routes: {
         "splash":(BuildContext context)=>Splash(),
         "login":(BuildContext context)=>LoginPage(),
+        "rePassword":(BuildContext context)=>ResetPassword(),
+        "coPassword":(BuildContext context)=>ConfirmPassword(),
         "register":(BuildContext context)=>RegistrationPage(),
         "principal":(BuildContext context)=>MainPage(),
       },
     );
-    }
+  }
 
 }
 

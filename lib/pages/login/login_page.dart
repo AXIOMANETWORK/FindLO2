@@ -181,8 +181,8 @@ class _LoginPageState extends State<LoginPage> {
           Text(
             "Don't have an account?",
             style: TextStyle(
-                color: Colors.black,
-                fontSize: 17
+              color: Colors.black,
+              fontSize: 17,
             ),
           ),
           SizedBox(width: 7),
@@ -193,9 +193,9 @@ class _LoginPageState extends State<LoginPage> {
             child: Text(
               "Sign up",
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                  fontSize: 17
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+                fontSize: 17,
               ),
             ),
           ),
@@ -208,7 +208,9 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
-            onTap: (){},
+            onTap: (){
+              Navigator.pushNamed(context,"rePassword");
+            },
             child: Text(
               "Forgot your password? ",
               style: TextStyle(
