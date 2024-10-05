@@ -251,7 +251,7 @@ class _LoginPageState extends State<LoginPage> {
             icon: controller.isLoading
                 ? CircularProgressIndicator() // Muestra el indicador de carga
                 : Image.asset(
-              'assets/img/google_logo.png',
+              'assets/img/Google branding icon.png',
               width: 24,
               height: 24,
             ),
@@ -294,7 +294,7 @@ class _LoginPageState extends State<LoginPage> {
             icon: controller.isLoading
                 ? CircularProgressIndicator() // Muestra el indicador de carga
                 : Image.asset(
-              'assets/img/facebook_logo.png',
+              'assets/img/Facebook logo icon.png',
               width: 24,
               height: 24,
             ),

@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -35,30 +36,19 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
       // BottomNavigationBar en la parte inferior de la pantalla
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Color.fromARGB(255,255, 65, 81),
+        animationDuration: Duration(milliseconds: 400),
+        items:[
+          Icon(
+            Icons.map,
+            color: Colors.white,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Map',
+          Icon(
+            Icons.settings,
+            color: Colors.white,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex, // El índice seleccionado actualmente
-        selectedItemColor: Colors.pink[400], // Color del ítem seleccionado
-        unselectedItemColor: Colors.grey, // Color de los ítems no seleccionados
-        onTap: _onItemTapped, // Llamar cuando se selecciona un ítem
-        type: BottomNavigationBarType.fixed, // Para mantener todos los ítems visibles
+        ]
       ),
     );
   }
