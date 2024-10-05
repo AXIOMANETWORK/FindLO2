@@ -37,16 +37,42 @@ class _MainPageState extends State<MainPage> {
       ),
       // BottomNavigationBar en la parte inferior de la pantalla
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Color.fromARGB(255,255, 65, 81),
+        backgroundColor: Colors.white,
+        color: Color.fromARGB(255,255, 65, 81),
         animationDuration: Duration(milliseconds: 400),
+        onTap: (index){
+          print(index);
+        },
         items:[
-          Icon(
-            Icons.map,
-            color: Colors.white,
+          Image.asset(
+            "assets/img/Mapa_Icono.png",
+            height: 20,
+            width: 20,
           ),
-          Icon(
-            Icons.settings,
-            color: Colors.white,
+          Image.asset(
+            "assets/img/Directorio_Icono.png",
+            height: 20,
+            width: 20,
+          ),
+          Image.asset(
+            "assets/img/Promociones_Icono.png",
+            height: 20,
+            width: 20,
+          ),
+          Image.asset(
+            "assets/img/Vallara.png",
+            height: 20,
+            width: 20,
+          ),
+          Image.asset(
+            "assets/img/Usuario_Icono.png",
+            height: 20,
+            width: 20,
+          ),
+          Image.asset(
+            "assets/img/Contacto_Icono.png",
+            height: 20,
+            width: 20,
           ),
         ]
       ),
