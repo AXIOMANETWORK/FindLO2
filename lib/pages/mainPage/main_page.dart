@@ -10,19 +10,8 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
+  final PageController _pageController = PageController(); // Controlador del PageView
 
-  // Listado de pantallas o widgets a mostrar según el índice seleccionado
-  static const List<Widget> _pages = <Widget>[
-    Center(child: Text("Home Page")),
-    Center(child: Text("Map Page")),
-    Center(child: Text("Notifications")),
-    Center(child: Text("Profile Page")),
-  ];
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index; // Cambiar el índice de la página seleccionada
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,52 +20,171 @@ class _MainPageState extends State<MainPage> {
           // Agregamos el AppBar personalizado
           CustomAppBar(),
           Expanded(
-            child: _pages[_selectedIndex], // Mostrar la página seleccionada
+            child: PageView(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _selectedIndex = index; // Actualizar el índice seleccionado
+                });
+              },
+              children: [
+                MapaScreen(), // Tus pantallas personalizadas
+                DirectorioScreen(),
+                PromocionesScreen(),
+                VallartaScreen(),
+                UsuarioScreen(),
+                ContactoScreen(),
+              ],
+            ),
           ),
         ],
       ),
       // BottomNavigationBar en la parte inferior de la pantalla
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
-        color: Color.fromARGB(255,255, 65, 81),
+        color: Color.fromARGB(255, 255, 65, 81),
         animationDuration: Duration(milliseconds: 400),
-        onTap: (index){
-          print(index);
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index; // Cambia el índice cuando el usuario hace clic en un ícono
+          });
+          _pageController.animateToPage(
+            index,
+            duration: Duration(milliseconds: 400),
+            curve: Curves.easeInOut,
+          ); // Navegar a la página correspondiente
         },
-        items:[
-          Image.asset(
-            "assets/img/Mapa_Icono.png",
-            height: 20,
-            width: 20,
+        items: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/img/Mapa_Icono.png",
+                height: MediaQuery.of(context).size.height * 0.031,
+                width: MediaQuery.of(context).size.width * 0.055,
+              ),
+              Text(
+                "Mapa",
+                style: TextStyle(color: Colors.white, fontSize: 10),
+              ),
+            ],
           ),
-          Image.asset(
-            "assets/img/Directorio_Icono.png",
-            height: 20,
-            width: 20,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/img/Directorio_Icono.png",
+                height: MediaQuery.of(context).size.height * 0.04,
+                width: MediaQuery.of(context).size.width * 0.05,
+              ),
+              Text(
+                "Directorio",
+                style: TextStyle(color: Colors.white, fontSize: 10),
+              ),
+            ],
           ),
-          Image.asset(
-            "assets/img/Promociones_Icono.png",
-            height: 20,
-            width: 20,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/img/Promociones_Icono.png",
+                height: MediaQuery.of(context).size.height * 0.04,
+                width: MediaQuery.of(context).size.width * 0.05,
+              ),
+              Text(
+                "FindTastic",
+                style: TextStyle(color: Colors.white, fontSize: 10),
+              ),
+            ],
           ),
-          Image.asset(
-            "assets/img/Vallara.png",
-            height: 20,
-            width: 20,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/img/Vallara.png",
+                height: MediaQuery.of(context).size.height * 0.035,
+                width: MediaQuery.of(context).size.width * 0.05,
+              ),
+              Text(
+                "Vallarta",
+                style: TextStyle(color: Colors.white, fontSize: 10),
+              ),
+            ],
           ),
-          Image.asset(
-            "assets/img/Usuario_Icono.png",
-            height: 20,
-            width: 20,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/img/Usuario_Icono.png",
+                height: MediaQuery.of(context).size.height * 0.035,
+                width: MediaQuery.of(context).size.width * 0.05,
+              ),
+              Text(
+                "Usuario",
+                style: TextStyle(color: Colors.white, fontSize: 10),
+              ),
+            ],
           ),
-          Image.asset(
-            "assets/img/Contacto_Icono.png",
-            height: 20,
-            width: 20,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/img/Contacto_Icono.png",
+                height: MediaQuery.of(context).size.height * 0.035,
+                width: MediaQuery.of(context).size.width * 0.05,
+              ),
+              Text(
+                "Contacto",
+                style: TextStyle(color: Colors.white, fontSize: 10),
+              ),
+            ],
           ),
-        ]
+        ],
       ),
     );
+  }
+}
+
+// Pantallas de ejemplo para navegar
+class MapaScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Mapa Screen'));
+  }
+}
+
+class DirectorioScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Directorio Screen'));
+  }
+}
+
+class PromocionesScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Promociones Screen'));
+  }
+}
+
+class VallartaScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Vallara Screen'));
+  }
+}
+
+class UsuarioScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Usuario Screen'));
+  }
+}
+
+class ContactoScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Contacto Screen'));
   }
 }
 
