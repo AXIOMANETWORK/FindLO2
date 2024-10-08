@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DirectorioScreen extends StatefulWidget {
   @override
@@ -33,7 +34,12 @@ class _DirectorioScreenState extends State<DirectorioScreen> {
                   children: [
                     Text(
                       restaurantData['name'],
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.normal
+                        )
+                      ),
                     ),
                     IconButton(
                       icon: Icon(Icons.close),
