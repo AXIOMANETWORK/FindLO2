@@ -32,22 +32,25 @@ class _DirectorioScreenState extends State<DirectorioScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      restaurantData['name'],
-                      style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.normal
-                        )
-                      ),
-                    ),
                     IconButton(
-                      icon: Icon(Icons.close),
+                      icon: Icon(Icons.arrow_back_ios),
                       onPressed: () => Navigator.pop(context),
+                    ),
+                    Expanded(
+                      child: Text(
+                        restaurantData['name'],
+                        textAlign: TextAlign.center,  // Centra el texto
+                        style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 35),
 
                 // Imagen del lugar
                 ClipRRect(
@@ -59,7 +62,7 @@ class _DirectorioScreenState extends State<DirectorioScreen> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 25),
 
                 // Información del lugar
                 Expanded(
