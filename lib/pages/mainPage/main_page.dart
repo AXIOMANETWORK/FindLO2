@@ -1,5 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_trabajo/pages/Map/map_page.dart';
+import 'package:flutter_trabajo/pages/Promociones/promo_page.dart';
+import 'package:flutter_trabajo/pages/Usuario/user_page.dart';
+import 'package:flutter_trabajo/pages/Vallarta/vallarta_page.dart';
+
+import '../Directory/directory_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -17,8 +23,6 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: Column(
         children: [
-          // Agregamos el AppBar personalizado
-          CustomAppBar(),
           Expanded(
             child: PageView(
               controller: _pageController,
@@ -28,12 +32,11 @@ class _MainPageState extends State<MainPage> {
                 });
               },
               children: [
-                MapaScreen(), // Tus pantallas personalizadas
+                MapPage(),
                 DirectorioScreen(),
-                PromocionesScreen(),
-                VallartaScreen(),
-                UsuarioScreen(),
-                ContactoScreen(),
+                PromoPage(),
+                VallartaPage(),
+                UserPage(),
               ],
             ),
           ),
@@ -125,174 +128,12 @@ class _MainPageState extends State<MainPage> {
               ),
             ],
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/img/Contacto_Icono.png",
-                height: MediaQuery.of(context).size.height * 0.035,
-                width: MediaQuery.of(context).size.width * 0.05,
-              ),
-              Text(
-                "Contacto",
-                style: TextStyle(color: Colors.white, fontSize: 10),
-              ),
-            ],
-          ),
         ],
       ),
     );
   }
 }
 
-// Pantallas de ejemplo para navegar
-class MapaScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Mapa Screen'));
-  }
-}
 
-class DirectorioScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Directorio Screen'));
-  }
-}
 
-class PromocionesScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Promociones Screen'));
-  }
-}
 
-class VallartaScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Vallara Screen'));
-  }
-}
-
-class UsuarioScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Usuario Screen'));
-  }
-}
-
-class ContactoScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Contacto Screen'));
-  }
-}
-
-class CustomAppBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 16), // Espaciado para la barra de estado
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color(0xFFFD5C69), // Rosa claro
-            Color(0xFFFFFFFF), // Rosa oscuro
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Fila que contiene el título y el botón de búsqueda
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "FINDLO",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  // Acción al presionar el botón de búsqueda
-                },
-                icon: Icon(Icons.search, color: Colors.white),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          // Selector de categorías (simulación de dropdown)
-          Row(
-            children: [
-              CategorySelector(
-                categories: ["Topics", "Restaurant"], // Lista de categorías
-                selectedIndex: 1, // Indice de la categoría seleccionada
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Enter your keywords",
-                    hintStyle: TextStyle(color: Colors.black),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide.none,
-                    ),
-                    prefixIcon: Icon(Icons.search, color: Colors.white70),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CategorySelector extends StatelessWidget {
-  final List<String> categories;
-  final int selectedIndex;
-
-  const CategorySelector({
-    required this.categories,
-    required this.selectedIndex,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: DropdownButton<String>(
-        value: categories[selectedIndex],
-        icon: Icon(Icons.arrow_drop_down, color: Colors.white),
-        dropdownColor: Colors.pink[200], // Color del dropdown
-        underline: SizedBox(),
-        items: categories.map((String category) {
-          return DropdownMenuItem<String>(
-            value: category,
-            child: Text(
-              category,
-              style: TextStyle(color: Colors.green),
-            ),
-          );
-        }).toList(),
-        onChanged: (String? newValue) {
-          // Acción al seleccionar una nueva categoría
-        },
-      ),
-    );
-  }
-}

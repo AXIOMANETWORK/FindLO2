@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'login_controller.dart';
@@ -56,9 +57,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget _textLogin(){
     return Text(
       "Login",
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 40,
+      style: GoogleFonts.dancingScript(
+        textStyle: TextStyle(
+          fontSize: 45,
+          color:  Color.fromARGB(255, 255, 65, 81),
+        )
+
       ),
     );
   }
