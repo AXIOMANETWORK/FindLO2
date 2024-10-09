@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_trabajo/pages/login/confirm_password.dart';
-import 'package:flutter_trabajo/pages/login/login_controller.dart';
-import 'package:flutter_trabajo/pages/login/login_page.dart';
-import 'package:flutter_trabajo/pages/login/reset_password.dart';
-import 'package:flutter_trabajo/pages/mainPage/main_page.dart';
-import 'package:flutter_trabajo/pages/register/register_page.dart';
-import 'package:flutter_trabajo/widgets/splash_screen.dart';
+import 'package:findloapp/pages/login/confirm_password.dart';
+import 'package:findloapp/pages/login/login_controller.dart';
+import 'package:findloapp/pages/login/login_page.dart';
+import 'package:findloapp/pages/login/reset_password.dart';
+import 'package:findloapp/pages/mainPage/main_page.dart';
+import 'package:findloapp/pages/register/register_page.dart';
+import 'package:findloapp/widgets/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
@@ -18,13 +18,13 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LoginController()), // Aquí se añade el controlador
+        ChangeNotifierProvider(
+            create: (_) => LoginController()), // Aquí se añade el controlador
       ],
       child: MyApp(),
     ),
   );
 }
-
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -33,7 +33,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-  class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -42,18 +42,16 @@ class MyApp extends StatefulWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: "splash",
       theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-    ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
       routes: {
-        "splash":(BuildContext context)=>Splash(),
-        "login":(BuildContext context)=>LoginPage(),
-        "rePassword":(BuildContext context)=>ResetPassword(),
-        "coPassword":(BuildContext context)=>ConfirmPassword(),
-        "register":(BuildContext context)=>RegistrationPage(),
-        "principal":(BuildContext context)=>MainPage(),
+        "splash": (BuildContext context) => Splash(),
+        "login": (BuildContext context) => LoginPage(),
+        "rePassword": (BuildContext context) => ResetPassword(),
+        "coPassword": (BuildContext context) => ConfirmPassword(),
+        "register": (BuildContext context) => RegistrationPage(),
+        "principal": (BuildContext context) => MainPage(),
       },
     );
   }
-
 }
-
