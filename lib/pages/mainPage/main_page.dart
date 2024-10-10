@@ -15,47 +15,41 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 0; // Índice seleccionado de la barra de navegación
   final PageController _pageController = PageController(); // Controlador del PageView
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (index) {
-                setState(() {
-                  _selectedIndex = index; // Actualizar el índice seleccionado
-                });
-              },
-              children: [
-                MapPage(),
-                DirectorioScreen(),
-                PromoPage(),
-                VallartaPage(),
-                UserPage()
-              ],
-            ),
-          ),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            _selectedIndex = index; // Actualiza el índice cuando se cambia la página
+          });
+        },
+        children:[
+          MapPage(),
+          DirectorioScreen(),
+          PromoPage(),
+          VallartaPage(),
+          UserPage(),
         ],
       ),
-      // BottomNavigationBar en la parte inferior de la pantalla
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
-        color: Color.fromARGB(255, 255, 65, 81),
-        animationDuration: Duration(milliseconds: 400),
+        color: const Color.fromARGB(255, 255, 65, 81),
+        animationDuration: const Duration(milliseconds: 400),
+        index: _selectedIndex, // Sincroniza con el índice actual
         onTap: (index) {
           setState(() {
             _selectedIndex = index; // Cambia el índice cuando el usuario hace clic en un ícono
           });
           _pageController.animateToPage(
             index,
-            duration: Duration(milliseconds: 400),
+            duration: const Duration(milliseconds: 400),
             curve: Curves.easeInOut,
-          ); // Navegar a la página correspondiente
+          ); // Navega a la página correspondiente
         },
         items: [
           Column(
@@ -66,7 +60,7 @@ class _MainPageState extends State<MainPage> {
                 height: MediaQuery.of(context).size.height * 0.031,
                 width: MediaQuery.of(context).size.width * 0.055,
               ),
-              Text(
+              const Text(
                 "Mapa",
                 style: TextStyle(color: Colors.white, fontSize: 10),
               ),
@@ -80,7 +74,7 @@ class _MainPageState extends State<MainPage> {
                 height: MediaQuery.of(context).size.height * 0.04,
                 width: MediaQuery.of(context).size.width * 0.05,
               ),
-              Text(
+              const Text(
                 "Directorio",
                 style: TextStyle(color: Colors.white, fontSize: 10),
               ),
@@ -94,7 +88,7 @@ class _MainPageState extends State<MainPage> {
                 height: MediaQuery.of(context).size.height * 0.04,
                 width: MediaQuery.of(context).size.width * 0.05,
               ),
-              Text(
+              const Text(
                 "FindTastic",
                 style: TextStyle(color: Colors.white, fontSize: 10),
               ),
@@ -108,7 +102,7 @@ class _MainPageState extends State<MainPage> {
                 height: MediaQuery.of(context).size.height * 0.035,
                 width: MediaQuery.of(context).size.width * 0.05,
               ),
-              Text(
+              const Text(
                 "Vallarta",
                 style: TextStyle(color: Colors.white, fontSize: 10),
               ),
@@ -122,7 +116,7 @@ class _MainPageState extends State<MainPage> {
                 height: MediaQuery.of(context).size.height * 0.035,
                 width: MediaQuery.of(context).size.width * 0.05,
               ),
-              Text(
+              const Text(
                 "Usuario",
                 style: TextStyle(color: Colors.white, fontSize: 10),
               ),
@@ -133,7 +127,3 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
-
-
-
-

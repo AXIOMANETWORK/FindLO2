@@ -62,7 +62,6 @@ class _LoginPageState extends State<LoginPage> {
           fontSize: 45,
           color:  Color.fromARGB(255, 255, 65, 81),
         )
-
       ),
     );
   }
@@ -170,8 +169,12 @@ class _LoginPageState extends State<LoginPage> {
         },
         child: Text("Login", style: TextStyle(fontSize: 20)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255, 79, 129, 189),
-          foregroundColor: Colors.white,
+          side: BorderSide(
+            color:  Color.fromARGB(255, 255, 65, 81),
+            width: 1.5
+          ),
+          backgroundColor:  Colors.white,
+          foregroundColor:  Color.fromARGB(255, 255, 65, 81),
           padding: EdgeInsets.symmetric(vertical: 15),
         ),
       ),
@@ -198,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
               "Sign up",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.blue,
+                color:  Color.fromARGB(255, 255, 65, 81),
                 fontSize: 17,
               ),
             ),
@@ -261,8 +264,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             label: Text("Login with Google", style: TextStyle(fontSize: 20)),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red[400],
-              foregroundColor: Colors.white,
+              side: BorderSide(
+                  color:  Color.fromARGB(255, 255, 65, 81),
+                  width: 1.5
+              ),
+              backgroundColor: Colors.white,
+              foregroundColor:  Color.fromARGB(255, 255, 65, 81),
               padding: EdgeInsets.symmetric(vertical: 15),
             ),
           ),
@@ -304,8 +311,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             label: Text("Login with Facebook", style: TextStyle(fontSize: 20)),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue[400],
-              foregroundColor: Colors.white,
+              side: BorderSide(
+                  color:  Color.fromARGB(255, 24, 119, 242),
+                  width: 1.5
+              ),
+              backgroundColor: Colors.white,
+              foregroundColor: Color.fromARGB(255, 24, 119, 242),
               padding: EdgeInsets.symmetric(vertical: 15),
             ),
           ),

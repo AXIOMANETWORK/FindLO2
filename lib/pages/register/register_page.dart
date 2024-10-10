@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -263,9 +264,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget _textRegister(){
     return Text(
       "Sign Up",
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 40,
+      style: GoogleFonts.dancingScript(
+          textStyle: TextStyle(
+            fontSize: 45,
+            color:  Color.fromARGB(255, 255, 65, 81),
+          )
       ),
     );
   }
@@ -299,7 +302,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               "Login",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color:  Color.fromARGB(255, 255, 65, 81),
                   fontSize: 17
               ),
             ),
@@ -320,8 +323,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
         },
         child: Text("Sign up", style: TextStyle(fontSize: 20)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255,79, 129, 189),
-          foregroundColor: Colors.white,
+          side: BorderSide(
+              color:  Color.fromARGB(255, 255, 65, 81),
+              width: 1.5
+          ),
+          backgroundColor: Colors.white,
+          foregroundColor: Color.fromARGB(255, 255, 65, 81),
           padding: EdgeInsets.symmetric(vertical: 15),
         ),
       ),
