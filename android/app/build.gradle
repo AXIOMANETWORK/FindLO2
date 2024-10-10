@@ -38,12 +38,12 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "com.axioma.findlo"
-    compileSdk = localProperties.getProperty("flutter.compileSdkVersion", "30").toInteger()
+    compileSdk = localProperties.getProperty("flutter.compileSdkVersion", "34").toInteger()
     ndkVersion = localProperties.getProperty("flutter.ndkVersion", "21.3.6528147")
     defaultConfig {
         applicationId "com.axioma.findlo"
         minSdkVersion localProperties.getProperty("flutter.minSdkVersion", "16").toInteger()
-        targetSdkVersion localProperties.getProperty("flutter.targetSdkVersion", "30").toInteger()
+        targetSdkVersion localProperties.getProperty("flutter.targetSdkVersion", "34").toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -51,7 +51,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.axiomanetwork"
+        applicationId "com.axioma.findlo"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = 23
@@ -62,6 +62,14 @@ android {
                 'appAuthRedirectScheme': 'com.googleusercontent.apps.862054338294-q1b4uho22jo8ajfk9k8udoulqu4t3erv.apps.googleusercontent.com'
         ]
 
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
     }
 
     buildTypes {
