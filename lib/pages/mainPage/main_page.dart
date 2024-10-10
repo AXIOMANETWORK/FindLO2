@@ -1,9 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:findloapp/pages/Map/map_page.dart';
+import 'package:findloapp/pages/Promociones/promo_page.dart';
+import 'package:findloapp/pages/Usuario/user_page.dart';
+import 'package:findloapp/pages/Vallarta/vallarta_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_trabajo/pages/Map/map_page.dart';
-import 'package:flutter_trabajo/pages/Promociones/promo_page.dart';
-import 'package:flutter_trabajo/pages/Usuario/user_page.dart';
-import 'package:flutter_trabajo/pages/Vallarta/vallarta_page.dart';
 
 import '../Directory/directory_page.dart';
 
@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> {
                 DirectorioScreen(),
                 PromoPage(),
                 VallartaPage(),
-                UserPage(),
+                UserPage()
               ],
             ),
           ),

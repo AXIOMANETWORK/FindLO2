@@ -18,7 +18,7 @@ class _DirectorioScreenState extends State<DirectorioScreen> {
       ),
       builder: (BuildContext context) {
         return FractionallySizedBox(
-          heightFactor: 0.9, // Altura fija del 70% de la pantalla
+          heightFactor: 0.9, // Altura fija del 90% de la pantalla
           child: Container(
             padding: EdgeInsets.all(16.0),
             decoration: BoxDecoration(
@@ -39,7 +39,7 @@ class _DirectorioScreenState extends State<DirectorioScreen> {
                     Expanded(
                       child: Text(
                         restaurantData['name'],
-                        textAlign: TextAlign.center,  // Centra el texto
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                             fontSize: 24,
