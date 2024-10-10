@@ -14,7 +14,7 @@ class _VallartaPageState extends State<VallartaPage> {
       appBar: AppBar(
         title: const Text('PUERTO VALLARTA'),
         centerTitle: true,
-        backgroundColor: Colors.white, // Color de fondo del AppBar
+        backgroundColor: Colors.white,
         elevation: 0, // Sin sombra en el AppBar
         automaticallyImplyLeading: false,
       ),
@@ -65,11 +65,10 @@ class BannerItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // Acción cuando el usuario haga clic en el banner
-        print('$text seleccionado'); // Aquí puedes añadir la navegación a otra pantalla
+        print('$text seleccionado');
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10), // Espacio entre banners
-        height: 200, // Altura del banner
+        height: 200,
         width: double.infinity, // Ancho completo
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -100,9 +99,9 @@ class BannerItem extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 10), // Espacio entre el texto y la flecha
+                  const SizedBox(width: 20), // Espacio entre el texto y la flecha
                   const Icon(
-                    Icons.arrow_forward_ios, // Flecha hacia la derecha
+                    Icons.arrow_forward_ios,
                     color: Colors.white,
                     size: 24,
                   ),
