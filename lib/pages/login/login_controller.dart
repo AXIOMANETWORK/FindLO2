@@ -45,6 +45,7 @@ class LoginController extends ChangeNotifier {
         'email': _user!.email,
         'name': _user!.displayName,
         'photoURL': _user!.photoURL,
+        'phone': _user!.phoneNumber,
         // Aquí puedes añadir más campos si lo necesitas
       }, SetOptions(merge: true)); // Usa merge: true para no sobrescribir datos existentes
 
@@ -80,6 +81,7 @@ class LoginController extends ChangeNotifier {
             'email': _user!.email,
             'name': _user!.displayName,
             'photoURL': _user!.photoURL,
+            'phone': _user!.phoneNumber,
             // Aquí puedes añadir más campos si lo necesitas
           }, SetOptions(merge: true)); // Usa merge: true para no sobrescribir datos existentes
 

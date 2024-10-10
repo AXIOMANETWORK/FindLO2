@@ -20,7 +20,7 @@ class _DirectorioScreenState extends State<DirectorioScreen> {
         return FractionallySizedBox(
           heightFactor: 0.9, // Altura fija del 90% de la pantalla
           child: Container(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0), // Márgenes para evitar que se desborde
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
@@ -50,7 +50,7 @@ class _DirectorioScreenState extends State<DirectorioScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 35),
+                SizedBox(height: 20),
 
                 // Imagen del lugar
                 ClipRRect(
@@ -64,51 +64,76 @@ class _DirectorioScreenState extends State<DirectorioScreen> {
                 ),
                 SizedBox(height: 25),
 
-                // Información del lugar
+                // Información del lugar con margen adicional
                 Expanded(
-                  child: ListView(
-                    children: [
-                      Text(
-                        restaurantData['info'],
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(height: 16),
-                      Row(
-                        children: [
-                          Icon(Icons.location_on, color: Colors.redAccent),
-                          SizedBox(width: 8),
-                          Expanded(
-                            child: Text(restaurantData['direccion']),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: ListView(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            restaurantData['info'],
+                            style: TextStyle(fontSize: 16, height: 1.4), // Ajuste de altura de línea
                           ),
-                        ],
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Icon(Icons.access_time, color: Colors.blueAccent),
-                          SizedBox(width: 8),
-                          Text('Horario: ${restaurantData['horario']}'),
-                        ],
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Icon(Icons.phone, color: Colors.green),
-                          SizedBox(width: 8),
-                          Text('Teléfono: ${restaurantData['telefono']}'),
-                        ],
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Icon(Icons.web, color: Colors.orange),
-                          SizedBox(width: 8),
-                          Expanded(
-                            child: Text('Web: ${restaurantData['web']}'),
-                          ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Icon(Icons.location_on, color: Colors.redAccent),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                restaurantData['direccion'],
+                                style: TextStyle(fontSize: 14),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2, // Límite de líneas para evitar desbordes
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Icon(Icons.access_time, color: Colors.blueAccent),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                'Horario: ${restaurantData['horario']}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Icon(Icons.phone, color: Colors.green),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                'Teléfono: ${restaurantData['telefono']}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Icon(Icons.web, color: Colors.orange),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                'Web: ${restaurantData['web']}',
+                                style: TextStyle(fontSize: 14),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -119,9 +144,18 @@ class _DirectorioScreenState extends State<DirectorioScreen> {
     );
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Directorio'),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 255, 65, 81), // Color de fondo del AppBar
+        elevation: 0, // Sin sombra en el AppBar
+        automaticallyImplyLeading: false,
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('restaurants').snapshots(),
         builder: (context, snapshot) {
