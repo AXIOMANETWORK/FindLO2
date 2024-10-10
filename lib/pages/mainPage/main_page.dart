@@ -40,6 +40,7 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Colors.white,
         color: const Color.fromARGB(255, 255, 65, 81),
         animationDuration: const Duration(milliseconds: 400),
+        height: MediaQuery.of(context).size.height * 0.07,
         index: _selectedIndex, // Sincroniza con el índice actual
         onTap: (index) {
           setState(() {
@@ -55,70 +56,85 @@ class _MainPageState extends State<MainPage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/img/Mapa_Icono.png",
-                height: MediaQuery.of(context).size.height * 0.031,
-                width: MediaQuery.of(context).size.width * 0.055,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 1.0), // Añade más espacio vertical
+                child: Image.asset(
+                  "assets/img/Mapa_Icono.png",
+                  height: MediaQuery.of(context).size.height * 0.031,
+                  width: MediaQuery.of(context).size.width * 0.055,
+                ),
               ),
               const Text(
-                "Mapa",
-                style: TextStyle(color: Colors.white, fontSize: 10),
+                "  Mapa  ",
+                style: TextStyle(color: Colors.white, fontSize: 12), // Ajusta el tamaño del texto
               ),
             ],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/img/Directorio_Icono.png",
-                height: MediaQuery.of(context).size.height * 0.04,
-                width: MediaQuery.of(context).size.width * 0.05,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0),
+                child: Image.asset(
+                  "assets/img/Directorio_Icono.png",
+                  height: MediaQuery.of(context).size.height * 0.04,
+                  width: MediaQuery.of(context).size.width * 0.05,
+                ),
               ),
               const Text(
-                "Directorio",
-                style: TextStyle(color: Colors.white, fontSize: 10),
+                "  Directorio  ",
+                style: TextStyle(color: Colors.white, fontSize: 12),
               ),
             ],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/img/Promociones_Icono.png",
-                height: MediaQuery.of(context).size.height * 0.04,
-                width: MediaQuery.of(context).size.width * 0.05,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0),
+                child: Image.asset(
+                  "assets/img/Promociones_Icono.png",
+                  height: MediaQuery.of(context).size.height * 0.04,
+                  width: MediaQuery.of(context).size.width * 0.07,
+                ),
               ),
               const Text(
-                "FindTastic",
-                style: TextStyle(color: Colors.white, fontSize: 10),
+                "  FindTastic  ",
+                style: TextStyle(color: Colors.white, fontSize: 12),
               ),
             ],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/img/Vallara.png",
-                height: MediaQuery.of(context).size.height * 0.035,
-                width: MediaQuery.of(context).size.width * 0.05,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0),
+                child: Image.asset(
+                  "assets/img/Vallara.png",
+                  height: MediaQuery.of(context).size.height * 0.035,
+                  width: MediaQuery.of(context).size.width * 0.08,
+                ),
               ),
               const Text(
-                "Vallarta",
-                style: TextStyle(color: Colors.white, fontSize: 10),
+                " Vallarta ",
+                style: TextStyle(color: Colors.white, fontSize: 12),
               ),
             ],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/img/Usuario_Icono.png",
-                height: MediaQuery.of(context).size.height * 0.035,
-                width: MediaQuery.of(context).size.width * 0.05,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0),
+                child: Image.asset(
+                  "assets/img/Usuario_Icono.png",
+                  height: MediaQuery.of(context).size.height * 0.035,
+                  width: MediaQuery.of(context).size.width * 0.06,
+                ),
               ),
               const Text(
-                "Usuario",
-                style: TextStyle(color: Colors.white, fontSize: 10),
+                " Usuario ",
+                style: TextStyle(color: Colors.white, fontSize: 12),
               ),
             ],
           ),
