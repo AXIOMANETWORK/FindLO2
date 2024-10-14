@@ -58,9 +58,11 @@ class _UserPageState extends State<UserPage> {
               children: [
                 CircleAvatar(
                   radius: 40,
-                  backgroundImage: NetworkImage(userData?['photoURL'] ??
-                      'https://via.placeholder.com/150'),
+                  backgroundImage: userData?['photoURL'] != null
+                      ? NetworkImage(userData!['photoURL'])
+                      : AssetImage('assets/img/no-profile-pic.png') as ImageProvider,
                 ),
+
                 SizedBox(width: 16),
                 Expanded(
                   child: Column(
