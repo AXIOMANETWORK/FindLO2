@@ -29,9 +29,9 @@ class _MainPageState extends State<MainPage> {
           });
         },
         children:[
-          MapPage(),
           DirectorioScreen(),
           PromoPage(),
+          MapPage(),
           VallartaPage(),
           UserPage(),
         ],
@@ -57,23 +57,6 @@ class _MainPageState extends State<MainPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 1.0), // Añade más espacio vertical
-                child: Image.asset(
-                  "assets/img/Mapa_Icono.png",
-                  height: MediaQuery.of(context).size.height * 0.031,
-                  width: MediaQuery.of(context).size.width * 0.055,
-                ),
-              ),
-              const Text(
-                "  Mapa  ",
-                style: TextStyle(color: Colors.white, fontSize: 12), // Ajusta el tamaño del texto
-              ),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2.0),
                 child: Image.asset(
                   "assets/img/Directorio_Icono.png",
@@ -82,7 +65,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               const Text(
-                "  Directorio  ",
+                "Directorio",
                 style: TextStyle(color: Colors.white, fontSize: 12),
               ),
             ],
@@ -95,12 +78,29 @@ class _MainPageState extends State<MainPage> {
                 child: Image.asset(
                   "assets/img/Promociones_Icono.png",
                   height: MediaQuery.of(context).size.height * 0.04,
-                  width: MediaQuery.of(context).size.width * 0.07,
+                  width: MediaQuery.of(context).size.width * 0.06,
                 ),
               ),
               const Text(
-                "  FindTastic  ",
+                "FindTastic",
                 style: TextStyle(color: Colors.white, fontSize: 12),
+              ),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 1.0), // Añade más espacio vertical
+                child: Image.asset(
+                  "assets/img/Mapa_Icono.png",
+                  height: MediaQuery.of(context).size.height * 0.031,
+                  width: MediaQuery.of(context).size.width * 0.055,
+                ),
+              ),
+              const Text(
+                "  Mapa  ",
+                style: TextStyle(color: Colors.white, fontSize: 12), // Ajusta el tamaño del texto
               ),
             ],
           ),
