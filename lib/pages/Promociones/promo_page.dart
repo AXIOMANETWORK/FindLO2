@@ -37,6 +37,8 @@ class _PromoPageState extends State<PromoPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -50,7 +52,7 @@ class _PromoPageState extends State<PromoPage> {
         automaticallyImplyLeading: false,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 16),
+            padding: EdgeInsets.only(right: size.width * 0.04),
             child: CircleAvatar(
               backgroundImage:
               AssetImage('assets/img/no-profile-pic.png') as ImageProvider,
@@ -62,16 +64,17 @@ class _PromoPageState extends State<PromoPage> {
         children: [
           // Cupón destacado
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(size.width * 0.04),
             child: CouponHighlightCard(
-              imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhhiOdSwr-TssAcDdf06PLl5mzZXdxpzErfQ&s',
+              imageUrl:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhhiOdSwr-TssAcDdf06PLl5mzZXdxpzErfQ&s',
               discount: '50% Descuento',
               title: 'Cupón PRINCIPAL',
             ),
           ),
           // Sección de categorías
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: EdgeInsets.symmetric(vertical: size.height * 0.01),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -92,6 +95,11 @@ class _PromoPageState extends State<PromoPage> {
                     onTap: () => selectCategory('Deportes'),
                   ),
                   CategoryButton(
+                    title: 'Gastronomía',
+                    isSelected: selectedCategory == 'Gastronomía',
+                    onTap: () => selectCategory('Gastronomía'),
+                  ),
+                  CategoryButton(
                     title: 'Conciertos',
                     isSelected: selectedCategory == 'Conciertos',
                     onTap: () => selectCategory('Conciertos'),
@@ -106,29 +114,26 @@ class _PromoPageState extends State<PromoPage> {
                     isSelected: selectedCategory == 'Cultura',
                     onTap: () => selectCategory('Cultura'),
                   ),
-                  CategoryButton(
-                    title: 'Gastronomía',
-                    isSelected: selectedCategory == 'Gastronomía',
-                    onTap: () => selectCategory('Gastronomía'),
-                  ),
                 ],
               ),
             ),
           ),
           // Línea horizontal de separación
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
+            margin: EdgeInsets.symmetric(horizontal: size.width * 0.04),
             height: 1,
             color: Colors.grey[300],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: EdgeInsets.symmetric(
+                horizontal: size.width * 0.04, vertical: size.height * 0.01),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Recomendados para ti',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: size.width * 0.04, fontWeight: FontWeight.bold),
                 ),
                 Icon(Icons.filter_list),
               ],
@@ -137,7 +142,7 @@ class _PromoPageState extends State<PromoPage> {
           // Lista de cupones
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
               child: StreamBuilder<QuerySnapshot>(
                 stream: getCoupons(),
                 builder: (context, snapshot) {
@@ -157,6 +162,7 @@ class _PromoPageState extends State<PromoPage> {
                         imageUrl: couponData['imageURL'],
                         title: couponData['title'],
                         description: couponData['description'],
+                        discount: couponData['discount'],
                       );
                     },
                   );
@@ -184,17 +190,19 @@ class CouponHighlightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       elevation: 4,
       child: Container(
         width: double.infinity,
-        height: 150,
+        height: size.height * 0.2,
         child: Row(
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(size.width * 0.02),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -202,15 +210,18 @@ class CouponHighlightCard extends StatelessWidget {
                     Text(
                       discount,
                       style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                        fontSize: size.width * 0.045,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                    SizedBox(height: 4),
+                    SizedBox(height: size.height * 0.01),
                     Text(
                       title,
                       style: TextStyle(
-                          fontSize: 14, color: Colors.grey[600]),
+                        fontSize: size.width * 0.035,
+                        color: Colors.grey[600],
+                      ),
                     ),
                   ],
                 ),
@@ -218,13 +229,13 @@ class CouponHighlightCard extends StatelessWidget {
             ),
             // Imagen del cupón
             Container(
-              margin: EdgeInsets.only(right: 20),
+              margin: EdgeInsets.only(right: size.width * 0.05),
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(15)),
                 child: Image.network(
                   imageUrl,
-                  width: 190,
-                  height: 120,
+                  width: size.width * 0.45,
+                  height: size.height * 0.15,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -241,17 +252,24 @@ class CouponCard extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String description;
+  final String discount;
 
   const CouponCard({
     required this.imageUrl,
     required this.title,
     required this.description,
+    required this.discount,
   });
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: size.width * 0.03,
+        vertical: size.height * 0.01,
+      ),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 4,
@@ -260,32 +278,52 @@ class CouponCard extends StatelessWidget {
             // Imagen del cupón
             ClipRRect(
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  bottomLeft: Radius.circular(15)),
+                topLeft: Radius.circular(15),
+                bottomLeft: Radius.circular(15),
+              ),
               child: Image.network(
                 imageUrl,
-                width: 100,
-                height: 100,
+                width: size.width * 0.25,
+                height: size.height * 0.13,
                 fit: BoxFit.cover,
               ),
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(size.width * 0.03),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                    // Sección de descuento
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: size.width * 0.04, // Adaptable
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          discount,
+                          style: TextStyle(
+                            fontSize: size.width * 0.035,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 4),
+                    SizedBox(height: size.height * 0.01),
                     Text(
                       description,
-                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                      style: TextStyle(
+                        fontSize: size.width * 0.035,
+                        color: Colors.grey[600],
+                      ),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(height: size.height * 0.02), // Espacio adaptable
                   ],
                 ),
               ),
@@ -297,7 +335,7 @@ class CouponCard extends StatelessWidget {
   }
 }
 
-// Widget para el botón de categoría
+// Botón de categoría
 class CategoryButton extends StatelessWidget {
   final String title;
   final bool isSelected;
@@ -311,6 +349,8 @@ class CategoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return GestureDetector(
       onTap: onTap,
       child: Padding(
@@ -325,12 +365,12 @@ class CategoryButton extends StatelessWidget {
                 color: isSelected ? Colors.black : Colors.grey[500],
               ),
             ),
-            SizedBox(height: 4),
+            SizedBox(height: size.height*0.005),
             // Subrayar la categoría seleccionada
             Container(
               height: 2,
-              width: 60,
-              color: isSelected ? Colors.black : Colors.transparent,
+              width: size.width *0.18,
+              color: isSelected ? Color.fromARGB(255, 255, 65, 81) : Colors.transparent,
             ),
           ],
         ),
