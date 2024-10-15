@@ -62,18 +62,19 @@ class BannerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         // Acción cuando el usuario haga clic en el banner
         print('$text seleccionado');
       },
       child: Container(
-        height: 200,
+        height: size.height * 0.25,
         width: double.infinity, // Ancho completo
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(imagePath), // Imagen de fondo
-            fit: BoxFit.cover, // Abarca todo el contenedor
+            fit: BoxFit.cover,
           ),
         ),
         child: Stack(
@@ -93,17 +94,17 @@ class BannerItem extends StatelessWidget {
                 children: [
                   Text(
                     text,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
-                      fontSize: 24,
+                      fontSize: size.width * 0.058,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 20), // Espacio entre el texto y la flecha
-                  const Icon(
+                  SizedBox(width: size.width * 0.06), // Espacio entre el texto y la flecha
+                  Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.white,
-                    size: 24,
+                    size: size.width * 0.06,
                   ),
                 ],
               ),

@@ -52,11 +52,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final verticalMargin = MediaQuery.of(context).size.height * 0.05;
-    final textFieldsMargin = MediaQuery.of(context).size.height * 0.01;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.symmetric(vertical: verticalMargin),
+        margin: EdgeInsets.symmetric(vertical: size.height * 0.05),
         width: double.infinity,
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -65,21 +64,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
             child: Column(
               children: [
                 _textRegister(),
-                SizedBox(height: 10),
+                SizedBox(height: size.height * 0.05),
                 _textRegisterDesc(),
-                SizedBox(height: 30),
+                SizedBox(height: size.height * 0.05),
                 _textFieldName(),
-                SizedBox(height: textFieldsMargin),
+                SizedBox(height: size.height * 0.01),
                 _textFieldEmail(),
-                SizedBox(height: textFieldsMargin),
+                SizedBox(height: size.height * 0.01 ),
                 _textFieldPhone(),
-                SizedBox(height: textFieldsMargin),
+                SizedBox(height:size.height * 0.01 ),
                 _textFieldAddress(),
-                SizedBox(height: textFieldsMargin),
+                SizedBox(height:size.height * 0.01 ),
                 _textFieldPassword(),
-                SizedBox(height: textFieldsMargin),
+                SizedBox(height: size.height * 0.01),
                 _textFieldConfirmPassword(),
-                SizedBox(height: textFieldsMargin),
+                SizedBox(height: size.height * 0.01),
                 _buttonRegister(),
                 _textHaveAccount()
               ],

@@ -9,6 +9,7 @@ class DirectorioScreen extends StatefulWidget {
 }
 
 class _DirectorioScreenState extends State<DirectorioScreen> {
+
   // Obtener las categorías desde Firebase
   Stream<QuerySnapshot> getCategories() {
     return FirebaseFirestore.instance.collection('categories').snapshots();
@@ -67,8 +68,8 @@ class _DirectorioScreenState extends State<DirectorioScreen> {
                   ); // Usamos categoryName para filtrar
                 },
                 child: BannerItem(
-                  imagePath: categoryData["imageURL"], // Imagen representativa de la categoría
-                  text: categoryData['displayName'],   // Mostramos displayName en el banner
+                  imagePath: categoryData["imageURL"],
+                  text: categoryData['displayName'],
                   gradientColors: categoryGradients[categoryData['categoryName']] ??  [Colors.blueAccent, Colors.blueAccent], // Color del gradiente
                 ),
               );
@@ -94,13 +95,14 @@ class BannerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      height: 200,
+      height: size.height *0.24,
       width: double.infinity, // Ancho completo
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(imagePath), // Imagen de fondo
-          fit: BoxFit.cover, // Abarca todo el contenedor
+          image: NetworkImage(imagePath),
+          fit: BoxFit.cover,
         ),
       ),
       child: Stack(
@@ -120,17 +122,17 @@ class BannerItem extends StatelessWidget {
               children: [
                 Text(
                   text, // Aquí usamos el displayName para mostrar en el banner
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
+                    fontSize: size.width * 0.06,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(width: 20), // Espacio entre el texto y la flecha
-                const Icon(
+                SizedBox(width: size.width * 0.06), // Espacio entre el texto y la flecha
+                Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.white,
-                  size: 24,
+                  size: size.width * 0.065,
                 ),
               ],
             ),

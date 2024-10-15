@@ -20,6 +20,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: PageView(
         controller: _pageController,
@@ -40,7 +41,7 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Colors.white,
         color: const Color.fromARGB(255, 255, 65, 81),
         animationDuration: const Duration(milliseconds: 400),
-        height: MediaQuery.of(context).size.height * 0.07,
+        height: size.height * 0.07,
         index: _selectedIndex, // Sincroniza con el índice actual
         onTap: (index) {
           setState(() {
@@ -60,13 +61,13 @@ class _MainPageState extends State<MainPage> {
                 padding: const EdgeInsets.symmetric(vertical: 2.0),
                 child: Image.asset(
                   "assets/img/Directorio_Icono.png",
-                  height: MediaQuery.of(context).size.height * 0.04,
-                  width: MediaQuery.of(context).size.width * 0.05,
+                  height: size.height * 0.04,
+                  width: size.width * 0.05,
                 ),
               ),
-              const Text(
+              Text(
                 "Directorio",
-                style: TextStyle(color: Colors.white, fontSize: 12),
+                style: TextStyle(color: Colors.white, fontSize: size.width * 0.03),
               ),
             ],
           ),
@@ -81,9 +82,9 @@ class _MainPageState extends State<MainPage> {
                   width: MediaQuery.of(context).size.width * 0.06,
                 ),
               ),
-              const Text(
+              Text(
                 "FindTastic",
-                style: TextStyle(color: Colors.white, fontSize: 12),
+                style: TextStyle(color: Colors.white, fontSize: size.width * 0.03),
               ),
             ],
           ),
@@ -91,16 +92,16 @@ class _MainPageState extends State<MainPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 1.0), // Añade más espacio vertical
+                padding: const EdgeInsets.symmetric(vertical: 1.0),
                 child: Image.asset(
                   "assets/img/Mapa_Icono.png",
                   height: MediaQuery.of(context).size.height * 0.031,
                   width: MediaQuery.of(context).size.width * 0.055,
                 ),
               ),
-              const Text(
+              Text(
                 "  Mapa  ",
-                style: TextStyle(color: Colors.white, fontSize: 12), // Ajusta el tamaño del texto
+                style: TextStyle(color: Colors.white, fontSize: size.width * 0.03),
               ),
             ],
           ),
@@ -115,9 +116,9 @@ class _MainPageState extends State<MainPage> {
                   width: MediaQuery.of(context).size.width * 0.08,
                 ),
               ),
-              const Text(
+              Text(
                 " Vallarta ",
-                style: TextStyle(color: Colors.white, fontSize: 12),
+                style: TextStyle(color: Colors.white, fontSize: size.width * 0.03),
               ),
             ],
           ),
@@ -132,9 +133,9 @@ class _MainPageState extends State<MainPage> {
                   width: MediaQuery.of(context).size.width * 0.06,
                 ),
               ),
-              const Text(
+              Text(
                 " Usuario ",
-                style: TextStyle(color: Colors.white, fontSize: 12),
+                style: TextStyle(color: Colors.white, fontSize: size.width * 0.03),
               ),
             ],
           ),

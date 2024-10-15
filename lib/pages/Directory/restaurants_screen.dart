@@ -19,7 +19,7 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
     switch (amenity.toLowerCase()) {
       case 'wifi':
         return FontAwesomeIcons.wifi;
-      case 'A/C':
+      case 'a/c':
         return Icons.air_sharp;
       case 'estacionamiento':
         return FontAwesomeIcons.squareParking;
@@ -45,6 +45,7 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
       ),
       builder: (BuildContext context) {
+        final size = MediaQuery.of(context).size;
         return FractionallySizedBox(
           heightFactor: 0.9,
           child: Container(
@@ -71,16 +72,16 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                           textAlign: TextAlign.center,
                           style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
-                              fontSize: 20,
+                              fontSize: size.width *0.05,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(width: 40), // Espacio para que la flecha y el texto estén alineados
+                      SizedBox(width: size.width *0.1), // Espacio para que la flecha y el texto estén alineados
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: size.height * 0.04),
 
                   // Imagen
                   Stack(
@@ -89,7 +90,7 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                         borderRadius: BorderRadius.circular(15.0),
                         child: Image.network(
                           restaurantData['image'],
-                          height: 240,
+                          height: size.height * 0.25,
                           width: double.infinity,
                           fit: BoxFit.cover,
                         ),
@@ -113,19 +114,19 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                                 restaurantData['name'],
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 22,
+                                  fontSize: size.width * 0.06,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Row(
                                 children: [
-                                  Icon(Icons.star, color: Colors.orange, size: 20),
-                                  SizedBox(width: 5),
+                                  Icon(Icons.star, color: Colors.orange, size: size.width * 0.06),
+                                  SizedBox(width: size.width * 0.01),
                                   Text(
                                     restaurantData['rating']?.toString() ?? 'N/A',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 18,
+                                      fontSize: size.width * 0.05,
                                     ),
                                   ),
                                 ],
@@ -136,27 +137,27 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: size.height * 0.03),
 
                   // Galería (si no está vacía)
                   if (restaurantData['gallery'] != null && restaurantData['gallery'].isNotEmpty) ...[
                     Text(
                       'Galería',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: size.width * 0.045, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: size.height * 0.015),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: restaurantData['gallery'].map<Widget>((imageUrl) {
                           return Padding(
-                            padding: const EdgeInsets.only(right: 10.0),
+                            padding: EdgeInsets.only(right: size.width * 0.02),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.network(
                                 imageUrl,
-                                height: 80,
-                                width: 80,
+                                height: size.height * 0.1,
+                                width: size.width * 0.25,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -164,7 +165,7 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                         }).toList(),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: size.height * 0.04),
                   ],
 
                   // Acerca de
@@ -172,12 +173,12 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                     'Acerca de',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: size.height * 0.01),
                   Text(
                     restaurantData['info'],
                     style: TextStyle(fontSize: 16, height: 1.4),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: size.height * 0.03),
 
                   // Características/Amenidades
                   Text(
@@ -185,17 +186,31 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
-                  Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
+                  Column(
                     children: (restaurantData['amenidades'] as List<dynamic>).map((amenity) {
-                      return Chip(
-                        label: Text(amenity),
-                        avatar: Icon(getAmenityIcon(amenity)),
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: size.height * 0.005),
+                        child: Row(
+                          children: [
+                            Icon(
+                              getAmenityIcon(amenity),
+                              size: size.width * 0.06,
+                              color: Colors.blueAccent,
+                            ),
+                            SizedBox(width: size.width * 0.06), // Espacio entre el ícono y el texto
+                            Text(
+                              amenity,
+                              style: TextStyle(
+                                fontSize: size.width * 0.045,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
                       );
                     }).toList(),
                   ),
-                  SizedBox(height: 40),
+                  SizedBox(height: size.height * 0.01),
                 ],
               ),
             ),
@@ -215,6 +230,7 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text('${widget.displayName}', style: TextStyle(color: Colors.white),),
@@ -239,11 +255,11 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                   _showRestaurantModal(context, restaurantData);
                 },
                 child: Card(
-                  margin: EdgeInsets.all(10.0),
+                  margin: EdgeInsets.all(size.width * 0.06),
                   child: ListTile(
                     leading: Image.network(
                       restaurantData['image'],
-                      width: 60,
+                      width: size.width * 0.25,
                       fit: BoxFit.cover,
                     ),
                     title: Text(restaurantData['name']),

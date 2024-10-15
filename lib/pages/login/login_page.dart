@@ -18,11 +18,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final verticalMargin = MediaQuery.of(context).size.height * 0.05;
-    final textFieldsMargin = MediaQuery.of(context).size.height * 0.01;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.symmetric(vertical: verticalMargin),
+        margin: EdgeInsets.symmetric(vertical: size.height * 0.05),
         width: double.infinity,
         child: SingleChildScrollView(
           child: Form(
@@ -30,21 +29,21 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 _textLogin(),
-                SizedBox(height: 10),
+                SizedBox(height:  size.height * 0.02),
                 _textLoginDesc(),
-                SizedBox(height: 30),
+                SizedBox(height:  size.height * 0.04),
                 _textFieldEmail(),
-                SizedBox(height: textFieldsMargin),
+                SizedBox(height: size.height * 0.01),
                 _textFieldPassword(),
                 _buttonLogin(),
                 _textForgotPassword(),
-                SizedBox(height: 60),
+                SizedBox(height:  size.height * 0.06),
                 _textLoginAlternatives(),
-                SizedBox(height: 20),
+                SizedBox(height:  size.height * 0.03),
                 _buttonGoogleLogin(),
-                SizedBox(height: textFieldsMargin),
+                SizedBox(height:  size.height * 0.015),
                 _buttonFacebookLogin(),
-                SizedBox(height: textFieldsMargin),
+                SizedBox(height:  size.height * 0.045),
                 _textDontHaveAccount()
               ],
             ),

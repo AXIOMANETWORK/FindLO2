@@ -33,6 +33,7 @@ class _UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text('Cuenta'),
@@ -63,7 +64,7 @@ class _UserPageState extends State<UserPage> {
                       : AssetImage('assets/img/no-profile-pic.png') as ImageProvider,
                 ),
 
-                SizedBox(width: 16),
+                SizedBox(width: size.width * 0.05),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +72,7 @@ class _UserPageState extends State<UserPage> {
                       Text(
                         userData?['name'] ?? 'Nombre no disponible',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: size.width * 0.055,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -79,7 +80,7 @@ class _UserPageState extends State<UserPage> {
                       Text(
                         userData?['email'] ?? 'Email no disponible',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: size.width * 0.045,
                           color: Colors.white70,
                         ),
                       ),
@@ -87,7 +88,7 @@ class _UserPageState extends State<UserPage> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.edit, color: Colors.white),
+                  icon: Icon(Icons.edit, color: Colors.white, size: size.width *0.07,),
                   onPressed: () {
                     // Acción para editar el perfil
                   },
@@ -103,10 +104,10 @@ class _UserPageState extends State<UserPage> {
                 _buildMenuItem(Icons.notifications, 'Notificaciones', context),
                 _buildMenuItem(Icons.support, 'Soporte', context),
                 _buildMenuItem(Icons.share, 'Redes Sociales', context),
-                SizedBox(height: 16),
+                SizedBox(height: size.height * 0.035),
                 ListTile(
-                  leading: Icon(Icons.logout, color: Colors.redAccent),
-                  title: Text('Log out'),
+                  leading: Icon(Icons.logout, color: Colors.redAccent, size: size.width * 0.07,),
+                  title: Text('Log out', style: TextStyle(fontSize: size.width *0.045),),
                   onTap: () async {
                     await FirebaseAuth.instance.signOut();
                     Navigator.of(context).pushReplacementNamed('login');
@@ -121,10 +122,11 @@ class _UserPageState extends State<UserPage> {
   }
 
   Widget _buildMenuItem(IconData icon, String title, BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return ListTile(
-      leading: Icon(icon, color: Colors.grey),
-      title: Text(title, style: TextStyle(fontSize: 18)),
-      trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey),
+      leading: Icon(icon, color: Colors.grey, size: size.width * 0.07,),
+      title: Text(title, style: TextStyle(fontSize: size.width * 0.048)),
+      trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey, size: size.width * 0.067,),
       onTap: () {
         // Acciones para cada opción de menú
       },
