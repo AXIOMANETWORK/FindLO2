@@ -235,6 +235,9 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
       appBar: AppBar(
         title: Text('${widget.displayName}', style: TextStyle(color: Colors.white),),
         backgroundColor: Color.fromARGB(255, 255, 65, 81),
+        iconTheme: IconThemeData(
+          color: Colors.white
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: getFilteredRestaurants(),

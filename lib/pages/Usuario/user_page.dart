@@ -36,7 +36,7 @@ class _UserPageState extends State<UserPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cuenta'),
+        title: Text('Cuenta', style: TextStyle(color: Colors.white)),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 255, 65, 81), // Color de fondo del AppBar
         elevation: 0, // Sin sombra en el AppBar
