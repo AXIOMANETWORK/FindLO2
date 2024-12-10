@@ -38,6 +38,8 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
 
   // Función para mostrar el modal con la información del lugar
   void _showRestaurantModal(BuildContext context, Map<String, dynamic> restaurantData) {
+    final size = MediaQuery.of(context).size;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -45,7 +47,6 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
       ),
       builder: (BuildContext context) {
-        final size = MediaQuery.of(context).size;
         return FractionallySizedBox(
           heightFactor: 0.9,
           child: Container(
@@ -68,31 +69,39 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                       ),
                       Expanded(
                         child: Text(
-                          restaurantData['category'] ?? 'Categoría',
+                          restaurantData['category'] ?? 'Categoría no disponible',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
-                              fontSize: size.width *0.05,
+                              fontSize: size.width * 0.05,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(width: size.width *0.1), // Espacio para que la flecha y el texto estén alineados
+                      SizedBox(width: size.width * 0.1), // Espacio para alinear elementos
                     ],
                   ),
                   SizedBox(height: size.height * 0.04),
 
-                  // Imagen
+                  // Imagen con comprobación de nulos
                   Stack(
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15.0),
                         child: Image.network(
-                          restaurantData['image'],
+                          restaurantData['image'] ?? 'assets/img/no-image-icon.png',
                           height: size.height * 0.25,
                           width: double.infinity,
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'assets/img/no-image-icon.png',
+                              height: size.height * 0.25,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            );
+                          },
                         ),
                       ),
                       Positioned(
@@ -111,7 +120,7 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                restaurantData['name'],
+                                restaurantData['name'] ?? 'Nombre no disponible',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: size.width * 0.06,
@@ -140,7 +149,8 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                   SizedBox(height: size.height * 0.03),
 
                   // Galería (si no está vacía)
-                  if (restaurantData['gallery'] != null && restaurantData['gallery'].isNotEmpty) ...[
+                  if (restaurantData['gallery'] != null &&
+                      (restaurantData['gallery'] as List).isNotEmpty) ...[
                     Text(
                       'Galería',
                       style: TextStyle(fontSize: size.width * 0.045, fontWeight: FontWeight.bold),
@@ -149,16 +159,24 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: restaurantData['gallery'].map<Widget>((imageUrl) {
+                        children: (restaurantData['gallery'] as List<dynamic>).map<Widget>((imageUrl) {
                           return Padding(
                             padding: EdgeInsets.only(right: size.width * 0.02),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.network(
-                                imageUrl,
+                                imageUrl ?? 'assets/img/no-image-icon.png',
                                 height: size.height * 0.1,
                                 width: size.width * 0.25,
                                 fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Image.asset(
+                                    'assets/img/no-image-icon.png',
+                                    height: size.height * 0.1,
+                                    width: size.width * 0.25,
+                                    fit: BoxFit.cover,
+                                  );
+                                },
                               ),
                             ),
                           );
@@ -175,7 +193,7 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                   ),
                   SizedBox(height: size.height * 0.01),
                   Text(
-                    restaurantData['info'],
+                    restaurantData['info'] ?? 'Información no disponible',
                     style: TextStyle(fontSize: 16, height: 1.4),
                   ),
                   SizedBox(height: size.height * 0.03),
@@ -187,19 +205,20 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                   ),
                   SizedBox(height: 10),
                   Column(
-                    children: (restaurantData['amenidades'] as List<dynamic>).map((amenity) {
+                    children: (restaurantData['amenidades'] as List<dynamic>? ?? [])
+                        .map((amenity) {
                       return Padding(
                         padding: EdgeInsets.symmetric(vertical: size.height * 0.005),
                         child: Row(
                           children: [
                             Icon(
-                              getAmenityIcon(amenity),
+                              getAmenityIcon(amenity.toString()),
                               size: size.width * 0.06,
                               color: Colors.blueAccent,
                             ),
-                            SizedBox(width: size.width * 0.06), // Espacio entre el ícono y el texto
+                            SizedBox(width: size.width * 0.06),
                             Text(
-                              amenity,
+                              amenity.toString(),
                               style: TextStyle(
                                 fontSize: size.width * 0.045,
                                 fontWeight: FontWeight.w500,
@@ -233,11 +252,9 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.displayName}', style: TextStyle(color: Colors.white),),
+        title: Text('${widget.displayName}', style: TextStyle(color: Colors.white)),
         backgroundColor: Color.fromARGB(255, 255, 65, 81),
-        iconTheme: IconThemeData(
-          color: Colors.white
-        ),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: getFilteredRestaurants(),
@@ -261,12 +278,19 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                   margin: EdgeInsets.all(size.width * 0.06),
                   child: ListTile(
                     leading: Image.network(
-                      restaurantData['image'],
+                      restaurantData['image'] ?? 'assets/images/placeholder.png',
                       width: size.width * 0.25,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          'assets/img/no-image-icon.png',
+                          width: size.width * 0.25,
+                          fit: BoxFit.cover,
+                        );
+                      },
                     ),
-                    title: Text(restaurantData['name']),
-                    subtitle: Text(restaurantData['category']),
+                    title: Text(restaurantData['name'] ?? 'Nombre no disponible'),
+                    subtitle: Text(restaurantData['category'] ?? 'Categoría no disponible'),
                   ),
                 ),
               );

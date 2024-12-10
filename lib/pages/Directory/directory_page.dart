@@ -2,14 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:findloapp/pages/Directory/restaurants_screen.dart';
 import 'package:flutter/material.dart';
 
-
 class DirectorioScreen extends StatefulWidget {
   @override
   _DirectorioScreenState createState() => _DirectorioScreenState();
 }
 
 class _DirectorioScreenState extends State<DirectorioScreen> {
-
   // Obtener las categorías desde Firebase
   Stream<QuerySnapshot> getCategories() {
     return FirebaseFirestore.instance.collection('categories').snapshots();
@@ -58,19 +56,20 @@ class _DirectorioScreenState extends State<DirectorioScreen> {
             itemBuilder: (context, index) {
               final categoryData = categories[index].data() as Map<String, dynamic>;
 
-              // Mostramos el displayName en el banner y el categoryName para el filtrado
+              // Comprobaciones para valores nulos con valores predeterminados
+              final imagePath = categoryData["imageURL"] ?? "https://via.placeholder.com/150";
+              final displayName = categoryData['displayName'] ?? "Categoría sin nombre";
+              final categoryName = categoryData['categoryName'] ?? "Desconocido";
+              final gradientColors = categoryGradients[categoryName] ?? [Colors.blueAccent, Colors.blueAccent];
+
               return GestureDetector(
                 onTap: () {
-                  onCategorySelected(
-                      context,
-                      categoryData['categoryName'],
-                      categoryData['displayName']
-                  ); // Usamos categoryName para filtrar
+                  onCategorySelected(context, categoryName, displayName);
                 },
                 child: BannerItem(
-                  imagePath: categoryData["imageURL"],
-                  text: categoryData['displayName'],
-                  gradientColors: categoryGradients[categoryData['categoryName']] ??  [Colors.blueAccent, Colors.blueAccent], // Color del gradiente
+                  imagePath: imagePath,
+                  text: displayName,
+                  gradientColors: gradientColors, // Color del gradiente
                 ),
               );
             },
@@ -97,7 +96,7 @@ class BannerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: size.height *0.24,
+      height: size.height * 0.24,
       width: double.infinity, // Ancho completo
       decoration: BoxDecoration(
         image: DecorationImage(
